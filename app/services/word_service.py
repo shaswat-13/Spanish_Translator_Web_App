@@ -51,7 +51,7 @@ def get_translation_from_api(word: str):
         
         return {
             "word":word_id,
-            "definition": definitions[0]
+            "meaning": definitions[0]
         }
     
 
