@@ -21,9 +21,7 @@ console_handler.setLevel(logging.DEBUG)
 console_handler.setFormatter(formatter)
 
 # File Handler with rotation (1 MB per file, keep 3 backups)
-file_handler = RotatingFileHandler(
-    LOG_FILE_PATH, maxBytes=1_000_000, backupCount=3
-)
+file_handler = RotatingFileHandler(LOG_FILE_PATH, maxBytes=1_000_000, backupCount=3)
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 
