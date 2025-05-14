@@ -1,4 +1,5 @@
 import random
+import json
 import requests
 from app.core.config import settings
 
@@ -18,43 +19,52 @@ local_words = [
     {"spanish": "noche", "english": "night"},
 ]
 
-def get_word_of_the_day(word: str):
+# Load the file with 50k spanish words
+with open("data/spanish_words.txt", "r", encoding="utf-8") as f:
+    spanish_word_list = [line.strip() for line in f if line.strip()]
+
+
+def get_word_of_the_day():
     """
     Get the translation from API or local based on .env setting.
     """
     if settings.word_source == "local":
         return random.choice(local_words)
+
     elif settings.word_source == "api":
-        return get_translation_from_api(word)
+        random_word = random.choice(spanish_word_list)
+        return get_translation_from_api(random_word)
+    
     else:
         raise NotImplementedError("Invalid word source in .env file. Choose 'local' or 'api'.")
    
-def get_translation_from_api(word: str):
-    """
-    Get the translation of a word from the API.
-    """
-    url = f"{BASE_URL}{word}?key={settings.api_key}"
+def get_translation_from_api(spanish_word):
+    url = f"{BASE_URL}{spanish_word}?key={settings.mw_api_key}"
     response = requests.get(url)
-    
-    if response.status_code == 200:
-        data = response.json()
-        if not data or not isinstance(data, list) or not isinstance(data[0], dict):
-            raise ValueError("Unexpected API response structure")
 
-        first_entry = data[0]
-
-        word_id = first_entry.get("meta", {}).get("id", "")
-        definitions = first_entry.get("shortdef", [])
-
-        if not definitions:
-            raise ValueError("No definitions found")
-        
-        return {
-            "word":word_id,
-            "meaning": definitions[0]
-        }
-    
-
-    else:
+    if response.status_code != 200:
         raise Exception(f"API request failed with status code {response.status_code}")
-    
+
+    data = response.json()
+    print("DEBUG: API response was:", json.dumps(data, indent=2))
+
+    try:
+        if isinstance(data, list) and data and "shortdef" in data[0]:
+            translation = data[0]["shortdef"][0]
+            return {
+                "spanish": spanish_word,
+                "english": translation
+            }
+        else:
+            raise ValueError("Unexpected API response structure")
+    except Exception as e:
+        print(f"Error parsing API response: {e}")
+        raise
+
+
+def get_random_word():
+    """
+    Get a random word from the local list.
+    """
+    random_word = random.choice(spanish_word_list)
+    return get_translation_from_api(random_word)
