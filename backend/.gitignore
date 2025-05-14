@@ -2,3 +2,38 @@
 __pycache__
 venv
 logs
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.python-version
+env/
+venv/
+parts/
+develop-eggs/
+.tox/
+.coverage
+.cache
+*.egg-info
+dist/
+build/
+eggs/
+sdist/
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+
+# IDE specific files (examples, you might need more)
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Other temporary files or directories
+tmp/
+temp/
