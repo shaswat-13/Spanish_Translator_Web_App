@@ -10,19 +10,6 @@ This is a full-stack web application that shows a **Spanish word of the day**, l
 I built this project while learning about web development, APIs, and full-stack app structure. This is a work-in-progress learning app.
 
 ---
-
-## Video Demo
-
-https://drive.google.com/file/d/1T15ZNICszUwQ0QFwluzRMd4x4fA4Fxz9/view?usp=sharing
-
-**Note: The project demo starts at 9m:30s of the video**
-
----
-## Github Link
-
-
-
----
 ##  Features
 
 - Displays a consistent “Word of the Day” that changes only once per day.

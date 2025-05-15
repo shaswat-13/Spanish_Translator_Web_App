@@ -37,3 +37,20 @@ logs/
 # Other temporary files or directories
 tmp/
 temp/
+
+# virtual environment
+spanishwebapp/
+venv/
+
+# environment variables
+.env
+
+# compiled files
+__pycache__/
+*.pyc
+
+# logs
+logs/
+
+# test cache
+.pytest_cache/
