@@ -27,7 +27,7 @@ logs/
 # Environment variables
 .env
 
-# IDE specific files (examples, you might need more)
+# IDE specific files 
 .idea/
 .vscode/
 *.swp
